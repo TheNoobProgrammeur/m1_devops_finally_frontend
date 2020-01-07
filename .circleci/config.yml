@@ -55,7 +55,7 @@ jobs:
              - v1-dependencies-
  
        - run: yarn build
-       - run: ls -la
+       - run: ls -la    
  
        - save_cache:
            paths:
@@ -70,7 +70,7 @@ jobs:
       - checkout 
       - run:
           name: Deploy app 
-          command: npx netlify-cli deploy  --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir ./ --prod
+          command: npx netlify-cli deploy  --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir ./dist --prod
 
 
 
