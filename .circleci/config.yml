@@ -55,7 +55,7 @@ jobs:
              - v1-dependencies-
  
        - run: yarn build
-       - run: ls -la    
+       - run: ls -la ./dist/m1_devops_finally_frontend
  
        - save_cache:
            paths:
