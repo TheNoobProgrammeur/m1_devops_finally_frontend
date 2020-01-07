@@ -88,7 +88,25 @@ jobs:
           name: Deploy app 
           command: npx netlify-cli deploy  --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir /tmp/server --prod
 
-
+  docker-build-and-push:
+    working_directory: /dockerapp
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=app -t app .
+      - deploy:
+          name: Publish application to docker hub
+          command: |
+            docker login -u $DOCKER_USER_NAME -p $DOCKER_PSWD
+            docker tag app $DOCKER_USER_NAME/m1_devops_finally_frontend:$CIRCLE_BUILD_NUM
+            docker tag app $DOCKER_USER_NAME/m1_devops_finally_frontend:latest
+            docker push $DOCKER_USER_NAME/m1_devops_finally_frontend:$CIRCLE_BUILD_NUM
+            docker push $DOCKER_USER_NAME/m1_devops_finally_frontend:latest
 
 workflows:
   version: 2
@@ -101,3 +119,6 @@ workflows:
       - server-deploy:
           requires:
             - build
+      - docker-build-and-push:
+          requires:
+            -install
