@@ -77,6 +77,8 @@ jobs:
     working_directory: ~/repo 
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp
       - restore_cache:
            keys:
              - v1-dependencies-{{ checksum "package.json" }}
