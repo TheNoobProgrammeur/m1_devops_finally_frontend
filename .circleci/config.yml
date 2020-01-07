@@ -59,17 +59,17 @@ jobs:
           name: Copy deployment artifacts to workspace
           command: |
             cp ./dist /tmp/server -r
-      - store_artifacts:
+       - store_artifacts:
           path: /tmp/server
-      - persist_to_workspace:
+       - persist_to_workspace:
           root: /tmp
           paths:
             - server
  
        - save_cache:
-           paths:
-             - node_modules
-           key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
   server-deploy:
     docker:
