@@ -55,6 +55,7 @@ jobs:
              - v1-dependencies-
  
        - run: yarn build
+       - run: ls -la
  
        - save_cache:
            paths:
