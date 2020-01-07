@@ -66,7 +66,7 @@ jobs:
       - image: circleci/node:dubnium-browsers
     working_directory: ~/repo 
     steps:
-        - checkout 
+      - checkout 
       - run:
           name: Deploy app 
           command: npx netlify-cli deploy  --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir ./ --prod
