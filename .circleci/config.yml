@@ -121,4 +121,4 @@ workflows:
             - build
       - docker-build-and-push:
           requires:
-            -install
+            - install
